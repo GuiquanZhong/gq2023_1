@@ -1,8 +1,8 @@
 #include"Slist.h"
 
-void SListPrint(SListNode* plist)
+void SListPrint(SListNode* phead)
 {
-	SListNode* cur = plist;
+	SListNode* cur = phead;
 	while(cur != NULL)
 	{
 		cout << cur->data;
@@ -11,19 +11,19 @@ void SListPrint(SListNode* plist)
 }
 
 
-void SListPushBack(SListNode** plist, SQDataType x)
+void SListPushBack(SListNode** pphead, SQDataType x)
 {
 	SListNode* newnode = (SListNode*)malloc(sizeof(SListNode));
 	newnode->data = x;
 	newnode->next = NULL;
 
-	if (*plist == NULL)
+	if (*pphead == NULL)
 	{
-		*plist = newnode;
+		*pphead = newnode;
 	}
 	else
 	{
-		SListNode* tail = *plist;
+		SListNode* tail = *pphead;
 		while (tail->next != NULL) 
 		{
 			tail = tail->next;
@@ -34,24 +34,43 @@ void SListPushBack(SListNode** plist, SQDataType x)
 	
 }
 
-void SListPushFront(SListNode** plist, SQDataType x)
+void SListPushFront(SListNode** pphead, SQDataType x)
 {
 	SListNode* newnode = (SListNode*)malloc(sizeof(SListNode));
 	newnode->data = x;
 	newnode->next = NULL;
 
 
-	newnode->next = *plist;
-	*plist = newnode;
+	newnode->next = *pphead;
+	*pphead = newnode;
 }
 
-void SListPopFront(SListNode** plist)
+void SListPopFront(SListNode** pphead)
 {
-	SListNode* next = (*plist)->next;//表示*是与plist结合的
-	free(*plist);
-	*plist = next;
+	SListNode* next = (*pphead)->next;//表示*是与plist结合的
+	free(*pphead);
+	*pphead = next;
 }
 
-void SListPopBack(SListNode** plist)
+void SListPopBack(SListNode** pphead)
 {
+	SListNode* prev = NULL;
+	SListNode* tail = *pphead;
+	if (*pphead == NULL)
+	{
+		return;
+	}
+	else if ((*pphead)->next == NULL)
+	{
+		free(*pphead);
+		*pphead = NULL;
+	}
+	while (tail->next!=NULL) 
+	{
+		prev = tail;
+		tail = tail->next;
+	}
+	free(tail);
+	prev->next = NULL;
+
 }

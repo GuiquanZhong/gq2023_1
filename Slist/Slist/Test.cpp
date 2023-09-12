@@ -9,6 +9,12 @@ void TestSList1()
 	SListPushBack(&plist, 4);
 	SListPushFront(&plist, 0);
 	SListPrint(plist);
+	cout << endl;
+	SListPopFront(&plist);
+	SListPopFront(&plist);
+	SListPopFront(&plist);
+	SListPopFront(&plist);
+	SListPrint(plist);
 }
 
 int main()

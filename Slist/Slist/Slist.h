@@ -10,13 +10,13 @@ struct SListNode
 
 typedef struct SListNode SLTNode;
 //不会改变链表的头指针，传一级指针
-void SListPrint(SListNode* plist);
+void SListPrint(SListNode* phead);
 //会改变链表的头指针，传二级指针
-void SListPushBack(SListNode** plist, SQDataType x);
-void SListPushFront(SListNode** plist, SQDataType x);
-void SListPopFront(SListNode** plist);
-void SListPopBack(SListNode** plist);
-void SListInsert(SListNode** plist, SQDataType x);
-void SListErase(SListNode** plist, SQDataType x);
+void SListPushBack(SListNode** pphead, SQDataType x);
+void SListPushFront(SListNode** pphead, SQDataType x);
+void SListPopFront(SListNode** pphead);
+void SListPopBack(SListNode** pphead);
+void SListInsert(SListNode** pphead, SQDataType x);
+void SListErase(SListNode** pphead, SQDataType x);
 
 
