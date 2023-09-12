@@ -16,7 +16,11 @@ void SListPushBack(SListNode** pphead, SQDataType x);
 void SListPushFront(SListNode** pphead, SQDataType x);
 void SListPopFront(SListNode** pphead);
 void SListPopBack(SListNode** pphead);
-void SListInsert(SListNode** pphead, SQDataType x);
-void SListErase(SListNode** pphead, SQDataType x);
+SListNode * SListFind(SListNode* phead, SQDataType x);
+//在pos前删除pos
+void SListInsert(SListNode** pphead,SListNode* pos, SQDataType x);
+//删除pos位置的值
+void SListErase(SListNode** pphead,SListNode* pos);
+
 
 

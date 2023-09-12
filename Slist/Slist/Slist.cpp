@@ -74,3 +74,58 @@ void SListPopBack(SListNode** pphead)
 	prev->next = NULL;
 
 }
+
+void SListInsert(SListNode** pphead, SListNode* pos, SQDataType x)
+{
+	SListNode* newnode = (SListNode*)malloc(sizeof(SListNode));
+	newnode->data = x;
+	newnode->next = NULL;
+	SListNode* prev = *pphead;
+	if (prev = pos)
+	{
+		newnode->next = *pphead;
+		*pphead = newnode;
+	}
+	else
+	{
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		prev->next = newnode;
+		newnode->next = pos;
+	}
+}
+
+void SListErase(SListNode** pphead, SListNode* pos)
+{
+	if (pos == *pphead)
+	{
+		SListPopFront(pphead);
+	}
+	else
+	{
+		SListNode* prev = *pphead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		prev->next = pos->next;
+		free(pos);
+	}
+}
+
+SListNode * SListFind(SListNode* phead, SQDataType x)
+{
+	SListNode* cur = phead;
+	
+	while (cur)
+	{
+		if (cur->data == x)
+		{
+			return cur;
+		}
+		cur = cur->next;
+	}
+	return NULL;
+}
