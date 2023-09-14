@@ -2,6 +2,9 @@
 #include<iostream>
 using namespace std;
 typedef int SQDataType;
+
+//可设置一个虚拟头节点
+
 struct SListNode
 {
 	SQDataType data;
