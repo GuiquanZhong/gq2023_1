@@ -33,6 +33,7 @@ void SeqListPushBack(SL* s1, SQDataType x)
 	//ÂúÁË¾ÍÒªÀ©ÈÝ
 	if (s1->size == s1->capacity)
 	{
+		int newcapacity = s1->capacity == 0 ? 4 : s1->capacity * 2;
 		SQDataType* tmp = (SQDataType*)realloc(s1->a, s1->capacity * 2 * sizeof(SQDataType));
 		if (tmp == NULL)
 		{  

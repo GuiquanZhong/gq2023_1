@@ -4,6 +4,7 @@
 #include<iostream>
 #define N 100
 #include<assert.h>
+
 typedef int SQDataType;
 typedef struct SeqList
 {
