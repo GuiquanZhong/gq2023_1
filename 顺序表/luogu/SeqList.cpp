@@ -72,7 +72,7 @@ void SeqListPopFront(SL* s1)
 void SeqListInsert(SL* s1, int pos, SQDataType x)
 {
 	assert(s1->size > pos);
-	if (s1->size=1 >= s1->capacity)
+	if (s1->size >= s1->capacity)
 	{
 		SQDataType* tmp = (SQDataType*)realloc(s1->a,s1->capacity * 2 * sizeof(SQDataType));
 	}
