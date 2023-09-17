@@ -28,12 +28,69 @@ void QueuePush(Queue* pq, QDataType x)
 	}
 }
 
+void QueueDestory(Queue* pq)
+{
+	assert(pq);
+	QNode* cur = pq->head;
+	while(cur)
+	{
+		QNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	pq->head = pq->tail = NULL;
+}
+
 void QueuePop(Queue* pq)
 {
 	assert(pq);
 	assert(pq->head);
-	QNode* next = pq->head->next;
-	free(pq->head);
-	pq->head = next;
+	//1¸ö
+	//¶à¸ö
+	if (pq->head->next == NULL)
+	{
+		free((pq->head));
+		pq->head = pq->tail = NULL;
+	}
+	else
+	{
+		QNode* next = pq->head->next;
+		free(pq->head);
+		pq->head = next;
+	}
+
+}
+
+QDataType QueueBack(Queue* pq)
+{
+	assert(pq);
+	assert(pq->tail);
+	return pq->tail->data;
+}
+
+QDataType QueueFront(Queue* pq)
+{
+	assert(pq);
+	assert(pq->head);
+	return pq->head->data;
+}
+
+int QueueSIze(Queue* pq)
+{
+	assert(pq);
+	int size = 0;
+	QNode* cur = pq->head;
+	while (cur)
+	{
+		size++;
+		cur = cur->next;
+	}
+	return size;
+}
+
+bool QueueEmpty(Queue* pq)
+{
+	assert(pq);
+	return pq->head == NULL;
 }
 
