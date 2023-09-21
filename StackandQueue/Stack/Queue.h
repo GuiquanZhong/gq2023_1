@@ -18,7 +18,7 @@ struct Queue
 
 void QueueInit(Queue* pq);
 void QueuePush(Queue* pq, QDataType x);
-
+void QueueDestory(Queue* pq);
 void QueuePop(Queue* pq);
 QDataType QueueBack(Queue* pq);
 QDataType QueueFront(Queue* pq);

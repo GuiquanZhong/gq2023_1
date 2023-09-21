@@ -1,6 +1,27 @@
 #include"Stack.h"
 #include"Queue.h"
 
+typedef char BTDataType;
+typedef struct BinaryTreeNode
+{
+	struct BinaryTreeNode* left;
+	struct BinaryTreeNode* right;
+	BTDataType data;
+}BTNode;
+
+void PrevOrder(BTNode* root)
+{
+	if (root == NULL)
+	{
+		cout << "NULL"<<" ";
+		return;
+	}
+
+	cout << root->data<<' ';
+	PrevOrder(root->left);
+	PrevOrder(root->right);
+}
+
 void TestStack()
 {
 	Stack st;
@@ -21,6 +42,10 @@ void TestStack()
 	}
 }
 
+
+
+
+
 void TestQueue()
 {
 	Queue q;
@@ -30,6 +55,6 @@ void TestQueue()
 int main()
 {
 	//TestStack
-
+	
 	return 0;
 }
