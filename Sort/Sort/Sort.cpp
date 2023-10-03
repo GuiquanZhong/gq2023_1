@@ -190,8 +190,36 @@ void BubbleSort(int* a, int n)
 }
 
 
+//快速排序
+//7,9,2,3,8,5,4,5,6,11
+void QuickSort(int* a, int n)
+{
+	int begin = 0, end = n - 1;
+	int pivot = begin;
+	int key = a[begin];
+	while (begin < end)
+	{
+		//右边找小，放到左边
+		while (begin<end&&a[end] >= key)
+		{
+			--end;
+		}
+		//小的放到左边的坑里，自己形成新的坑位
+		a[pivot] = a[end];
+		pivot = end;
 
 
+		//左边找大，放到右边，自己形成新的坑位
+		while (begin<end&&a[begin] <= key)
+		{
+			++begin;
+		}
+		a[pivot] = a[begin];
+		pivot = begin;
+	}
+	pivot = begin;
+	a[pivot] = key;
+}
 
 
 
@@ -200,9 +228,9 @@ void BubbleSort(int* a, int n)
 
 int main()
 {
-	int a[] = { 1,3,2,7,8,5,4,5,6,11 };
+	int a[] = { 7,9,2,3,8,5,4,5,6,11 };
 	//ShellSort(a, 10);
-	BubbleSort(a, 10);
+	QuickSort(a, 10);
 	Print(a,10);
 	return 0;
 }
