@@ -8,6 +8,15 @@ typedef struct BinaryTreeNode
 	BTDataType data;
 }BTNode;
 
+void DestoryTree(BTNode** root)
+{
+	if (*root == NULL)return;
+	DestoryTree(&(*root)->left);
+	DestoryTree(&(*root)->right);
+	free(*root);
+	*root = NULL;
+}
+
 void PrevOrder(BTNode* root)
 {
 	if (root == NULL)
