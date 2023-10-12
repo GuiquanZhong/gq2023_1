@@ -189,18 +189,55 @@ void BubbleSort(int* a, int n)
 
 }
 
-
-//快速排序
-//7,9,2,3,8,5,4,5,6,11
-void QuickSort(int* a, int n)
+//三数取中
+int GetMidIndex(int* a, int left, int right)
 {
-	int begin = 0, end = n - 1;
+	int mid = (left + right) / 2;
+	if (a[left] < a[mid])
+	{
+		if (a[mid] < a[right])
+		{
+			return mid;
+		}
+		else if (a[left] > a[right])
+		{
+			return left;
+		}
+		else
+		{
+			return right;
+		}
+	}
+
+	else
+	{
+		if (a[mid] > a[right])
+		{
+			return mid;
+		}
+		else if (a[right] > a[left])
+		{
+			return left;
+		}
+		else
+		{
+			return right; 
+		}
+	}
+}
+
+//挖坑法
+int PartSort1(int* a, int left, int right)
+{
+	int index = GetMidIndex(a, left, right);
+	swap(a[left], a[index]);
+	int begin = left, end = right;
 	int pivot = begin;
 	int key = a[begin];
 	while (begin < end)
 	{
 		//右边找小，放到左边
-		while (begin<end&&a[end] >= key)
+		while (begin < end && a[end] >= key)
 		{
 			--end;
 		}
@@ -210,7 +247,7 @@ void QuickSort(int* a, int n)
 
 
 		//左边找大，放到右边，自己形成新的坑位
-		while (begin<end&&a[begin] <= key)
+		while (begin < end && a[begin] <= key)
 		{
 			++begin;
 		}
@@ -219,18 +256,48 @@ void QuickSort(int* a, int n)
 	}
 	pivot = begin;
 	a[pivot] = key;
+
+	return pivot;
 }
 
+//快速排序
+//7,9,2,3,8,5,4,5,6,11
+void QuickSort(int* a, int left, int right)
+{
+	
+	int KeyIndex = PartSort1(a, left, right);
+	//[left,right]
+	//[left,KeyIndex-1] pivot  [KeyIndex+1,right]
+	//如果左子区间和右子区间都有序，那就有序，采用分治递归
 
-
-
+	QuickSort(a, left, KeyIndex - 1);
+	QuickSort(a, KeyIndex + 1, right);
+	//当数据很大时，在底层分开，用插入排序，比用快速排序快很多   -》小区间优化
+	/*if (KeyIndex - 1 - left > 10)
+	{
+		QuickSort(a, left, KeyIndex - 1);
+	}
+	else
+	{
+		InsertSort(a+left, KeyIndex-1-left+1);
+	}
+	if (right-(KeyIndex+1) > 10)
+	{
+		QuickSort(a, KeyIndex + 1, right);
+	}
+	else
+	{
+		InsertSort(a+KeyIndex+1, right - (KeyIndex +1)+1);
+	}*/
+	
+}
 
 
 int main()
 {
-	int a[] = { 7,9,2,3,8,5,4,5,6,11 };
+	int a[] = { 7,9,2,3,8,5,1,3,7,8,9 };
 	//ShellSort(a, 10);
-	QuickSort(a, 10);
+	QuickSort(a, 0,sizeof(a)/sizeof(int)-1);
 	Print(a,10);
 	return 0;
 }
